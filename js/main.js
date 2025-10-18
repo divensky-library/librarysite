@@ -480,32 +480,61 @@
         });
     })();
 
-    // --- Обработка формы контактов (локально, без сервера) ---
-    var contactForm = document.getElementById('contactForm');
-    var formMessage = document.getElementById('formMessage');
-    if (contactForm && formMessage) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            var data = new FormData(contactForm);
-            var name = (data.get('name') || '').toString().trim();
-            var email = (data.get('email') || '').toString().trim();
-            var message = (data.get('message') || '').toString().trim();
+    // --- Обработка формы контактов с EmailJS ---
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
 
-            // Простая валидация
+    if (contactForm && formMessage) {
+        const emailjsService = contactForm.dataset.emailjsService || '';
+        const emailjsTemplate = contactForm.dataset.emailjsTemplate || '';
+
+        contactForm.addEventListener('submit', e => {
+            e.preventDefault();
+
+            const data = new FormData(contactForm);
+            const name = (data.get('name') || '').trim();
+            const email = (data.get('email') || '').trim();
+            const message = (data.get('message') || '').trim();
+
             if (!name || !email || !message) {
                 formMessage.style.color = 'red';
                 formMessage.textContent = 'Пожалуйста, заполните все поля.';
                 return;
             }
-            // Имитация отправки
-            formMessage.style.color = 'green';
-            formMessage.textContent = 'Спасибо! Ваше сообщение отправлено.';
-            contactForm.reset();
-            setTimeout(function () {
-                formMessage.textContent = '';
-            }, 4000);
+
+            formMessage.style.color = 'blue';
+            formMessage.textContent = 'Сообщение отправляется...';
+
+            const showSuccess = () => {
+                formMessage.style.color = 'green';
+                formMessage.textContent = 'Спасибо! Ваше сообщение отправлено.';
+                contactForm.reset();
+                setTimeout(() => formMessage.textContent = '', 4000);
+            };
+
+            const showFailure = () => {
+                formMessage.style.color = 'red';
+                formMessage.textContent = 'Не удалось отправить сообщение. Свяжитесь с info@divensky.ru.';
+            };
+
+            if (emailjsService && emailjsTemplate && window.emailjs?.send) {
+                window.emailjs.send(emailjsService, emailjsTemplate, {
+                    name: name,
+                    message: message,
+                    from_email: email,
+                    email: "info@divensky.ru",
+                    page: window.location.href
+                }).then(showSuccess)
+                    .catch(err => {
+                        console.warn('EmailJS failed', err);
+                        showFailure();
+                    });
+            } else {
+                showFailure();
+            }
         });
     }
+
 
     // --- Инициализация карты OpenStreetMap (маркер и атрибуция) ---
     try {

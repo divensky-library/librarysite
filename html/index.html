@@ -138,7 +138,7 @@
 
     <section id="contact" class="contact container">
       <h2>Отправить сообщение</h2>
-      <form id="contactForm" class="contact-form">
+      <form id="contactForm" class="contact-form" data-emailjs-service="service_mz8c6fr" data-emailjs-template="template_i68tklk">
         <label>
           Ваше имя
           <input type="text" name="name" required>
@@ -172,14 +172,14 @@
         </a>
       </p>
       <p class="small footer-contacts">
-        <a class="contact-link" href="mailto:info@divensklib.ru" aria-label="Email: info@divensklib.ru">
+        <a class="contact-link" href="mailto:info@divensky.ru" aria-label="Email: info@divensky.ru">
           <span class="contact-icon" aria-hidden="true">
             <!-- email SVG -->
             <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill="currentColor" d="M0 2v10h20V2H0zm18 2.2l-8 4.8-8-4.8V3.2L10 8l8-4.8v1.2z"/>
             </svg>
           </span>
-          <span class="contact-text">info@divensklib.ru</span>
+          <span class="contact-text">info@divensky.ru</span>
         </a>
       </p>
     </div>
@@ -214,6 +214,17 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+      (function(){
+          emailjs.init({
+              publicKey: "2b7bpapd52kilEcdR",
+          });
+      })();
+  </script>
   <script src="../js/main.js"></script>
 </body>
 </html>

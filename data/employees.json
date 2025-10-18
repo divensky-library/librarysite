@@ -1,15 +1,15 @@
 [
   {
-    "name": "Юлия Викторовна",
+    "name": "Елена Кузнецова",
     "role": "Заведующая библиотекой",
-    "email": "yulia@divensklib.ru",
+    "email": "elena@divensky.ru",
     "bio": "Отвечает за общую организацию работы библиотеки.",
     "photo": "/images/zavd.jpg"
   },
   {
-    "name": "Елена Целуйко",
+    "name": "Марина Белова",
     "role": "Библиотекарь",
-    "email": "elena@divensklib.ru",
+    "email": "marinabelova@divensky.ru",
     "phone": "***REMOVED***",
     "bio": "Работает с читателями, помогает с подбором литературы.",
     "photo": "/images/bibl.jpg"
