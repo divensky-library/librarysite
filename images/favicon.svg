@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Иконка дом">
+  <title>Дом — Дивенская библиотека</title>
+  <!-- фон -->
+  <rect width="64" height="64" rx="10" fill="#f3efe6" />
+
+  <!-- крыша -->
+  <polygon points="8,28 32,8 56,28" fill="#6b4a2e" />
+
+  <!-- корпус дома -->
+  <rect x="12" y="28" width="40" height="24" rx="3" fill="#fff8ef" stroke="#6b4a2e" stroke-width="1.6" />
+
+  <!-- дверь -->
+  <rect x="28" y="36" width="8" height="16" rx="1" fill="#7aa17a" />
+  <circle cx="34" cy="44" r="0.9" fill="#4f3524" />
+
+  <!-- окна -->
+  <rect x="16" y="34" width="6" height="6" rx="0.8" fill="#eaf6ee" stroke="#6b4a2e" stroke-width="0.9" />
+  <rect x="42" y="34" width="6" height="6" rx="0.8" fill="#eaf6ee" stroke="#6b4a2e" stroke-width="0.9" />
+
+  <!-- тень -->
+  <ellipse cx="32" cy="56" rx="18" ry="3" fill="#000" opacity="0.06" />
+</svg>

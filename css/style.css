@@ -1,0 +1,286 @@
+/* Основные переменные и сброс */
+:root{
+  --bg:#f3efe6; /* тёплый бумажный фон */
+  --card:#fff8ef; /* цвет карточки - светлая бумага */
+  --accent:#6b4a2e; /* древесно-коричневый акцент */
+  --accent-2:#7aa17a; /* приглушённая зелень */
+  --muted:#6b5b4a;
+  --max-width:1100px;
+  --card-height:160px; /* фиксированная высота карточки для расчёта видимых рядов */
+  --grid-gap:20px;
+  --header-offset:88px; /* fallback used before JS measures header */
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+html{height:100%;
+  /* Use Inter for body text on the root element to avoid default browser font */
+  font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+}
+body{
+  margin:0;
+  /* font-family moved to html */
+  background:var(--bg);
+  color:#2b2b2b;
+  -webkit-font-smoothing:antialiased;
+}
+/* Headings and branding use PT Serif for a warm, classic look (has Cyrillic) */
+.logo, h1, h2, h3, h4, h5, h6 {
+  font-family: 'PT Serif', serif;
+}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 16px}
+
+/* Header */
+.site-header{position:fixed;top:0;left:0;right:0;width:100%;z-index:1100;/* stronger, darker header */background:linear-gradient(180deg, #b89372 0%, #dfc9b0 40%, rgba(243,239,230,0.98) 100%);border-bottom:1px solid rgba(107,90,74,0.18);backdrop-filter:blur(6px);box-shadow:0 6px 20px rgba(43,43,43,0.08)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.logo{font-family:'PT Serif', serif;font-weight:700;color:var(--accent);text-decoration:none;font-size:1.4rem}
+.logo-wrap{display:flex;flex-direction:column;min-width:0}
+.tagline{font-size:0.85rem;color:var(--muted);margin-top:4px}
+
+.main-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;flex-wrap:wrap}
+.main-nav li, .main-nav a{white-space:nowrap; word-break:keep-all; hyphens:none; -webkit-hyphens:none; overflow-wrap:normal}
+
+.main-nav a{display:inline-block;text-decoration:none;color:var(--muted);padding:6px 8px;border-radius:6px}
+.main-nav a:hover{color:#fff;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+
+/* Ensure page content isn't hidden under the fixed header */
+main{padding-top:var(--header-offset,88px)}
+
+/* Hero */
+.hero{background:linear-gradient(180deg, rgba(255,255,240,0.9) 0%, rgba(243,239,230,0.95) 100%);padding:56px 0;text-align:center;border-bottom:1px solid rgba(107,90,74,0.05)}
+.hero .lead{color:var(--muted);margin:12px 0;font-size:1.05rem}
+.btn{display:inline-block;background:linear-gradient(180deg,var(--accent),#5b3d27);color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;box-shadow:0 6px 18px rgba(107,74,46,0.12);transition:background .12s ease, box-shadow .12s ease, opacity .12s ease;border:0;cursor:pointer}
+
+/* Catalog */
+.catalog{padding:36px 0}
+.controls{margin:12px 0}
+#search{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(107,90,74,0.12);background:linear-gradient(180deg,#fff,#fff8f2)}
+
+.books-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--grid-gap);margin-top:18px}
+.book-card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 18px rgba(43,43,43,0.06);border:1px solid rgba(107,90,74,0.06);position:relative;overflow:hidden;height:var(--card-height);display:flex;flex-direction:column}
+.book-card:before{content:"";position:absolute;left:-30%;top:-30%;width:160%;height:60%;background:radial-gradient(circle at 10% 20%, rgba(255,255,255,0.6), rgba(255,255,255,0) 40%);transform:rotate(-15deg);opacity:0.18}
+.book-card h3{margin:0 0 8px 0;font-size:1.1rem;font-family:'PT Serif', serif;color:var(--accent)}
+.book-card .author{color:var(--muted);margin:0 0 10px 0}
+.book-card .desc{margin:0;color:#3a3a3a;font-size:0.96rem;margin-top:auto; /* push desc to bottom */
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis}
+.book-card.hidden{display:none}
+
+/* Ограничиваем видимую область каталога тремя рядами карточек и делаем прокрутку */
+.books-grid{
+  /* показываем два ряда карточек (rows = 2 => gaps = rows - 1 = 1) */
+  max-height: calc(var(--card-height) * 2 + var(--grid-gap) * 1);
+  overflow-y: auto;
+  padding-right: 8px; /* пространство для скроллбара */
+}
+
+/* Стили скроллбара для WebKit/Fallback */
+.books-grid{
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(107,90,74,0.30) rgba(243,239,230,0.6);
+}
+
+/* WebKit-based browsers (Chrome, Edge, Safari) */
+.books-grid::-webkit-scrollbar{width:12px}
+.books-grid::-webkit-scrollbar-track{background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(243,239,230,0.6));border-radius:12px;margin:6px 0}
+.books-grid::-webkit-scrollbar-thumb{background:linear-gradient(180deg, rgba(107,90,74,0.25), rgba(107,90,74,0.45));border-radius:12px;border:3px solid rgba(255,255,250,0.85)}
+.books-grid::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg, rgba(107,90,74,0.35), rgba(107,90,74,0.6))}
+
+/* Ensure contrast in high-contrast or forced color modes */
+@media (forced-colors: active){
+  .books-grid::-webkit-scrollbar-thumb{background:Highlight;border-color:ButtonFace}
+}
+
+/* Глобальная полоса прокрутки страницы (html/body) */
+html{
+  /* Firefox: thumb-color track-color */
+  scrollbar-width: thin;
+  /* делаем трек таким же, как фон страницы */
+  scrollbar-color: rgba(107,90,74,0.35) var(--bg);
+  /* Плавная прокрутка для якорных ссылок */
+  scroll-behavior: smooth;
+}
+
+/* WebKit-based browsers (Chrome, Edge, Safari) for page scrollbar */
+html::-webkit-scrollbar{width:12px;height:12px}
+html::-webkit-scrollbar-track{background:var(--bg);}
+html::-webkit-scrollbar-thumb{background:linear-gradient(180deg, rgba(107,90,74,0.25), rgba(107,90,74,0.45));border-radius:12px;border:3px solid rgba(255,255,250,0.85)}
+html::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg, rgba(107,90,74,0.35), rgba(107,90,74,0.6))}
+
+@media (forced-colors: active){
+  html::-webkit-scrollbar-thumb{background:Highlight;border-color:ButtonFace}
+}
+
+/* About & Contact */
+.about, .contact{padding:28px 0}
+.contact-form{display:grid;gap:10px;max-width:520px}
+.contact-form label{display:flex;flex-direction:column;font-size:0.95rem;color:#2b2b2b}
+.contact-form input, .contact-form textarea{padding:10px;border-radius:8px;border:1px solid rgba(107,90,74,0.1);background:linear-gradient(180deg,#fff,#fff8f3)}
+.form-message{margin-top:8px;color:green}
+
+/* Footer */
+.site-footer{
+  /* Сделали фон ч��ть темнее, чтобы футер визуально отделялся от основного контента */
+  background: linear-gradient(180deg, #e9e3d3 0%, var(--bg) 100%);
+  border-top:1px solid rgba(107,90,74,0.08);
+  padding:22px 0;
+  margin-top:36px;
+}
+.site-footer p{margin:6px 0;color:var(--muted)}
+.small{font-size:0.9rem}
+
+/* Decorative accents for theme */
+.theme-dacha body, .theme-dacha .container{ /* no-op, kept for future overrides */ }
+
+/* Стили для карты "Как пройти" */
+.map-wrap{margin-top:12px}
+#map{width:100%;height:340px;border-radius:12px;border:1px solid rgba(107,90,74,0.08);box-shadow:0 10px 30px rgba(43,43,43,0.06);background:#e9e6df}
+.map-note{margin-top:8px;font-size:0.95rem;color:var(--muted)}
+.map-note a{color:var(--accent);text-decoration:underline}
+
+/* Staff section */
+.staff{padding:28px 0}
+.staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:12px}
+.staff-card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 14px rgba(43,43,43,0.05);border:1px solid rgba(107,90,74,0.05);display:flex;gap:10px;align-items:flex-start}
+.staff-avatar{width:56px;height:56px;border-radius:50%;flex:0 0 56px;background:linear-gradient(135deg,#e6d9c6,#f7f1e6);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-family:'PT Serif', serif}
+.staff-avatar img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
+.staff-info{flex:1;min-width:0}
+.staff-info h3{margin:0 0 6px 0;font-size:1rem;font-family:'PT Serif', serif;color:var(--accent)}
+.staff-info .role{display:block;color:var(--muted);font-size:0.95rem;margin-bottom:6px}
+.staff-info .contact{font-size:0.95rem;color:#3a3a3a}
+.staff-info .contact a{color:var(--accent);text-decoration:underline}
+
+/* Contact rows: each contact on its own line with icon */
+.contact{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.contact-item{display:block}
+.contact-link{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none}
+.contact-link .contact-icon{width:22px;height:22px;flex:0 0 22px;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;color:var(--accent)}
+/* Ensure any inline SVG inside .contact-icon fills the container and matches sizing */
+.contact-link .contact-icon svg{width:100%;height:100%;display:block;vertical-align:middle}
+.contact-link .contact-text{color:#3a3a3a}
+.contact-link:hover .contact-text, .contact-link:focus .contact-text{color:var(--accent)}
+.contact-link:focus{outline:3px solid rgba(122,161,122,0.12);outline-offset:3px;border-radius:6px}
+
+/* About collapse/expand */
+.about-header{margin-bottom:6px}
+.collapse-toggle{
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,250,0.98));
+  border: 1px solid rgba(107,90,74,0.08);
+  color: var(--muted);
+  font-size:0.95rem;
+  cursor:pointer;
+  padding:8px 10px;
+  border-radius:18px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:background .12s ease, box-shadow .12s ease, color .12s ease;
+}
+.collapse-toggle:hover{background:linear-gradient(180deg,#fffefc,#fff9f0);box-shadow:0 6px 18px rgba(107,90,74,0.04)}
+.collapse-toggle:focus{outline:3px solid rgba(122,161,122,0.12);outline-offset:3px}
+.collapse-toggle .toggle-icon svg{transition:transform .22s ease;display:block}
+.collapse-toggle[aria-expanded="true"] .toggle-icon svg{transform:rotate(90deg)}
+.collapse-toggle .toggle-label{font-weight:600;color:var(--accent);font-size:0.95rem}
+
+/* Content wrapper: animate max-height and opacity. Initial collapsed state uses class 'collapsed'.
+   JS will set inline max-height when expanding for smooth animation that fits content. */
+.about-content{overflow:hidden;transition:max-height .28s ease,opacity .22s ease;padding-top:6px}
+.about-content.collapsed{max-height:0;opacity:0;padding-top:0}
+.about-content:not(.collapsed){opacity:1}
+
+@media (max-width:900px){
+  .staff-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .staff-grid{grid-template-columns:1fr}
+  .staff-card{align-items:center}
+  .staff-avatar{width:48px;height:48px;flex:0 0 48px}
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .books-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (max-width:640px){
+  .books-grid{grid-template-columns:1fr}
+  .main-nav{display:none}
+  .nav-toggle{display:inline-block}
+  .main-nav.open{display:block;position:absolute;left:12px;right:12px;top:86px;background:#fff;padding:12px;border-radius:10px;border:1px solid rgba(107,90,74,0.06)}
+  .main-nav ul{flex-direction:column;gap:8px}
+  .header-inner{position:relative}
+}
+
+/* Ensure the hamburger toggle is hidden on desktop/larger screens */
+@media (min-width:641px){
+  .nav-toggle{display:none !important}
+}
+
+/* Ensure anchors are not hidden behind the sticky header */
+main > section { scroll-margin-top: calc(var(--header-offset, 88px)); }
+
+/* Buttons and interactive elements */
+.btn{display:inline-block;background:linear-gradient(180deg,var(--accent),#5b3d27);color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;box-shadow:0 6px 18px rgba(107,74,46,0.12);transition:background .12s ease, box-shadow .12s ease, opacity .12s ease;border:0;cursor:pointer}
+.btn:hover{background:linear-gradient(180deg,#7a5a3f,#5b3d27);opacity:0.98}
+.btn:active{background:linear-gradient(180deg,#6d4f3b,#533626);opacity:0.95}
+.btn:focus{outline:3px solid rgba(122,161,122,0.18);outline-offset:3px}
+
+/* Make sure links with .btn also show pointer and focus styles */
+a.btn{display:inline-block}
+
+a.btn:focus{outline:3px solid rgba(122,161,122,0.18);outline-offset:3px}
+
+/* Nav toggle button interactions */
+.nav-toggle{background:transparent;border:0;font-size:1.4rem;padding:6px;border-radius:6px;cursor:pointer;transition:background .12s ease, color .12s ease}
+.nav-toggle:hover{background:rgba(107,90,74,0.06);color:var(--accent)}
+.nav-toggle:focus{outline:3px solid rgba(122,161,122,0.12);outline-offset:2px}
+
+/* Photo gallery */
+.photos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:12px}
+.photo-card{background:transparent;border-radius:8px;overflow:hidden;position:relative;cursor:pointer;display:block;padding:0;border:0;appearance:none}
+.photo-card img{width:100%;height:170px;object-fit:cover;display:block;border-radius:8px;transition:transform .18s ease,filter .18s ease}
+.photo-card:focus-within img,.photo-card:hover img{transform:scale(1.03);filter:brightness(0.98)}
+.photo-card .photo-caption{position:absolute;left:8px;right:8px;bottom:8px;background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.45));color:#fff;padding:8px;border-radius:6px;font-size:0.9rem;display:none}
+.photo-card:hover .photo-caption{display:block}
+
+/* Play badge for video thumbnails */
+.play-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;box-shadow:0 6px 18px rgba(0,0,0,0.35);}
+.play-badge:before{content:'';display:block;width:0;height:0;border-left:12px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}
+
+/* Modal media: ensure image and video fit nicely */
+.modal-media{display:flex;align-items:center;justify-content:center;max-width:90vw;max-height:80vh}
+.modal-media img{max-width:100%;max-height:80vh;border-radius:8px}
+.modal-media video{max-width:100%;max-height:80vh;border-radius:8px;background:#000}
+
+/* When modal opens, ensure controls visible and video uses full available space */
+.photo-modal.open .modal-media{pointer-events:auto}
+
+/* Modal viewer */
+.photo-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1200;background:rgba(0,0,0,0.75);padding:24px;flex-direction:column;gap:12px}
+.photo-modal.open{display:flex}
+.photo-modal img{max-width:90vw;max-height:80vh;border-radius:8px;box-shadow:0 18px 50px rgba(0,0,0,0.6)}
+.modal-caption{margin-top:12px;color:#fff;max-width:90vw;text-align:center}
+.modal-close,.modal-prev,.modal-next{position:absolute;background:rgba(255,255,255,0.06);border:0;color:#fff;font-size:26px;padding:10px;border-radius:8px;cursor:pointer}
+.modal-close{top:18px;right:18px}
+.modal-prev{left:18px;top:50%;transform:translateY(-50%);font-size:28px}
+.modal-next{right:18px;top:50%;transform:translateY(-50%);font-size:28px}
+.modal-close:focus,.modal-prev:focus,.modal-next:focus{outline:3px solid rgba(122,161,122,0.18);outline-offset:4px}
+
+/* Staff modal styles */
+.staff-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1250;background:rgba(0,0,0,0.5);padding:20px}
+.staff-modal.open{display:flex}
+.staff-modal .staff-modal-content{background:var(--card);border-radius:12px;padding:18px;max-width:760px;width:100%;box-shadow:0 14px 40px rgba(0,0,0,0.25);color:#2b2b2b}
+/* ensure absolute close button is positioned relative to content */
+.staff-modal .staff-modal-content{position:relative}
+.staff-modal .staff-modal-close{position:absolute;top:18px;right:18px;background:transparent;border:0;font-size:28px;color:var(--muted)}
+.staff-modal .staff-modal-close:focus{outline:3px solid rgba(122,161,122,0.18);outline-offset:4px}
+.staff-modal .staff-modal-header{display:flex;gap:12px;align-items:center}
+.staff-modal .staff-modal-avatar{width:72px;height:72px;border-radius:8px;background:linear-gradient(135deg,#e6d9c6,#f7f1e6);display:flex;align-items:center;justify-content:center;font-family:'PT Serif', serif;font-weight:700;color:var(--accent);font-size:1.25rem}
+.staff-modal .staff-modal-avatar img{width:100%;height:100%;object-fit:cover;display:block;border-radius:8px}
+.staff-modal .staff-modal-info h3{margin:0;font-family:'PT Serif', serif;color:var(--accent);font-size:1.2rem}
+.staff-modal .staff-modal-role{font-size:0.95rem;color:var(--muted)}
+.staff-modal .staff-modal-contacts{font-size:0.95rem}
+.staff-modal .staff-modal-bio{margin-top:10px;font-size:0.98rem;color:#3a3a3a}
+
+/* Ensure small screens look good */
+@media (max-width:640px){
+  .staff-modal .staff-modal-avatar{width:56px;height:56px;font-size:1rem}
+  .staff-modal .staff-modal-content{padding:14px}
+}
