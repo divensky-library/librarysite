@@ -2,16 +2,25 @@
   {
     "name": "Елена Кузнецова",
     "role": "Заведующая библиотекой",
-    "email": "elena@divensky.ru",
-    "bio": "Отвечает за общую организацию работы библиотеки.",
+    "email": "elena_k@divensky.ru",
+    "phone": "+7 (921) 762-34-89",
+    "bio": "Отвечает за общую организацию работы библиотеки",
     "photo": "/images/zavd.jpg"
   },
   {
-    "name": "Марина Белова",
-    "role": "Библиотекарь",
-    "email": "marinabelova@divensky.ru",
+    "name": "Валерий Павлович",
+    "role": "Помощник заведующей",
+    "email": "valeriy.pavlovich@divensky.ru",
     "phone": "***REMOVED***",
-    "bio": "Работает с читателями, помогает с подбором литературы.",
+    "bio": "Занимается учётом литературы",
+    "photo": "/images/petr.png"
+  },
+  {
+    "name": "Мария Виноградова",
+    "role": "Библиотекарь",
+    "email": "vinogradova@divensky.ru",
+    "phone": "+7 (911) 167-73-92",
+    "bio": "Проводит мероприятия",
     "photo": "/images/bibl.jpg"
   }
 ]

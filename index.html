@@ -1,230 +1,271 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Дивенский дом культуры и Дивенская библиотека</title>
-  <meta name="description" content="Дивенский сельский дом культуры и библиотека — культурный центр посёлка Дивенский: книги, мероприятия, краеведческий архив и творческие программы." />
-  <!-- Шрифты для дачного, уютного вида -->
-  <!-- Preconnect to Google Fonts for slightly faster font load -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Use Inter for body (good Cyrillic support, modern & highly readable) and PT Serif for headings/logo (has Cyrillic) -->
-  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Inter:wght@300;400;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <!-- Site favicon (SVG) -->
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <!-- Fallbacks for older browsers / platforms (place PNG/ICO files in images/ when available) -->
-  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16.png">
-  <link rel="shortcut icon" href="../images/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
-  <link rel="apple-touch-icon" href="images/favicon.svg">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Дивенский дом культуры</title>
+    <meta name="description"
+          content="Дивенский дом культуры — культурный центр посёлка Дивенский: книги, мероприятия, краеведческий архив и творческие программы."/>
+    <!-- Шрифты для дачного, уютного вида -->
+    <!-- Preconnect to Google Fonts for slightly faster font load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Use Inter for body (good Cyrillic support, modern & highly readable) and PT Serif for headings/logo (has Cyrillic) -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Inter:wght@300;400;600;700&display=swap&subset=cyrillic"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <!-- Site favicon (SVG) -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <!-- Fallbacks for older browsers / platforms (place PNG/ICO files in images/ when available) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16.png">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="images/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="theme-dacha">
-  <header class="site-header">
+<header class="site-header">
     <div class="container header-inner">
-      <div class="logo-wrap">
-        <a href="#" class="logo">Дивенский дом культуры и библиотека</a>
-        <div class="tagline">Культура, книги и дачная тишина</div>
-      </div>
-      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav">☰</button>
-      <nav id="mainNav" class="main-nav" aria-label="Главное меню">
-        <ul>
-          <li><a href="#">Главная</a></li>
-          <li><a href="#howto">Как пройти</a></li>
-          <li><a href="#catalog">Каталог</a></li>
-          <li><a href="#staff">Сотрудники</a></li>
-          <li><a href="#about">О&nbsp;библиотеке</a></li>
-          <li><a href="#gallery">Галерея</a></li>
-          <li><a href="#contact">Отправить сообщение</a></li>
-        </ul>
-      </nav>
+        <div class="logo-wrap">
+            <a href="#" class="logo">Дивенский дом</a>
+            <div class="tagline">
+                Культура живёт<br>
+                Книги говорят
+            </div>
+        </div>
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav">☰</button>
+        <nav id="mainNav" class="main-nav" aria-label="Главное меню">
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#howto">Как пройти</a></li>
+                <li><a href="#catalog">Каталог</a></li>
+                <li><a href="#staff">Сотрудники</a></li>
+                <li><a href="#about">О&nbsp;библиотеке</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#contact">Связаться с нами</a></li>
+                <li><a href="#online">Чаты</a></li>
+            </ul>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <main>
+<main>
     <section class="hero">
-      <div class="container">
-        <h1>Добро пожаловать в Дивенский дом культуры и библиотеку</h1>
-        <p class="lead">Книги, творчество и события — центр культурной жизни посёлка Дивенский.</p>
-        <a href="#catalog" class="btn">Посмотреть каталог</a>
-      </div>
+        <div class="container">
+            <h1>Добро пожаловать в Дивенский дом!</h1>
+            <p class="lead">Книги, творчество и события — центр культурной жизни посёлка Дивенский.</p>
+            <a href="#catalog" class="btn">Посмотреть каталог</a>
+        </div>
     </section>
 
     <!-- Перемещённая секция: Как пройти (теперь перед каталогом) -->
     <section id="howto" class="howto container">
-      <h2>Как пройти</h2>
-      <div class="map-wrap">
-        <div id="map" role="region" aria-label="Карта проезда" tabindex="0"></div>
-        <p class="map-note"><a id="osmLink" href="https://www.openstreetmap.org/?mlat=55.7558&mlon=37.6173#map=15/55.7558/37.6173" target="_blank" rel="noopener">Открыть в OpenStreetMap</a></p>
+        <h2>Как пройти</h2>
+        <div class="map-wrap">
+            <div id="map" role="region" aria-label="Карта проезда" tabindex="0"></div>
+            <p class="map-note"><a id="osmLink">Открыть в Яндексе</a></p>
 
-        <div class="map-hours" style="margin-top:8px;color:var(--muted);">
-          <h3 style="margin:0 0 6px 0;font-size:1rem;">Часы работы</h3>
-          <p style="margin:0;">Понедельник — суббота: 09:00 — 18:00<br>
-          Воскресенье: выходной</p>
+            <div class="map-hours" style="margin-top:8px;color:var(--muted);">
+                <h3 style="margin:0 0 6px 0;font-size:1rem;">Часы работы</h3>
+                <p style="margin:0;">Понедельник — суббота: 09:00 — 18:00<br>
+                    Воскресенье: выходной</p>
+            </div>
+
         </div>
-
-      </div>
     </section>
 
-    <section id="catalog" class="catalog container">
-      <h2>Каталог</h2>
-      <div class="controls">
-        <input id="search" type="search" placeholder="Поиск по названию или автору" aria-label="Поиск по каталогу">
-      </div>
-
-      <div class="books-grid" id="booksGrid">
-        <!-- Карточки будут рендер��ться динамически из data/books.json -->
-      </div>
-
-      <div class="catalog-actions" style="text-align:center;margin-top:18px;">
-        <p id="catalogNote" style="margin-top:8px;color:var(--muted);font-size:0.95rem;"></p>
-      </div>
-    </section>
+    <!-- catalog moved below gallery -->
 
     <!-- Перемещённая секция: Сотрудники (теперь прямо после каталога) -->
     <section id="staff" class="staff container">
-      <h2>Сотрудники</h2>
-      <p class="lead">Наша команда всегда готова помочь — познакомьтесь с сотрудниками библиотеки.</p>
-      <div class="staff-grid" id="staffGrid">
-        <!-- Карточки сотрудников будут сгенерированы динамически из data/employees.json -->
-      </div>
-    </section>
-
-    <section id="about" class="about container">
-      <div class="about-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
-        <h2>О доме культуры и библиотеке</h2>
-        <button id="aboutToggle" class="collapse-toggle" aria-expanded="false" aria-controls="aboutContent" aria-label="Показать раздел О библиотеке">
-          <span class="toggle-icon" aria-hidden="true">
-            <!-- simple chevron SVG -->
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <span class="toggle-label">Подробнее</span>
-        </button>
-      </div>
-
-      <div id="aboutContent" class="about-content collapsed" aria-hidden="true">
-        <p>Дивенский сельский дом культуры и библиотека — это центр культурной и общественной жизни посёлка Дивенский. Мы объединяем библиотечные фонды, творческие инициативы и площадки для мероприятий: от детских чтений и театральных кружков до выставок и фестивалей.</p>
-
-        <p>Наша миссия — поддерживать культурную активность жителей и сохранять местную память. В доме культуры регулярно проходят концерты, мастер‑классы, лекции и кинопоказы; библиотека при этом обеспечивает доступ к книгам и краеведческим материалам.</p>
-
-        <h3>Краткая история</h3>
-        <p>История нашего дома культуры началась в 1920‑е годы с небольшого читального уголка при сельском доме — со временем он вырос в стабильную площадку для встреч, творчества и хранения локальной истории. Фонд и архив, в том числе раздел «Дачная хроника», аккумулировали письма, фотографии и материалы, связанные с жизнью поселка.</p>
-
-        <h3>Что мы предлагаем</h3>
-        <ul>
-          <li>Библиотечный фонд: классика, современная литература и детские издания;</li>
-          <li>Культурные программы: концерты, выставки, театральные и творческие студии;</li>
-          <li>Детские и молодёжные проекты: кружки, чтения и образовательные программы;</li>
-          <li>Краеведческий архив и помощь в исследовании семейной истории;</li>
-          <li>Аренда площадок для местных инициатив и свободный доступ в зону Wi‑Fi.</li>
-        </ul>
-      </div>
+        <h2>Сотрудники</h2>
+        <p class="lead">Наша команда всегда готова помочь — познакомьтесь с нашими дружелюбными сотрудниками.</p>
+        <div class="staff-grid" id="staffGrid">
+            <!-- Карточки сотрудников будут сгенерированы динамически из data/employees.json -->
+        </div>
     </section>
 
     <!-- Новый раздел: Фотогалерея -->
     <section id="gallery" class="gallery container">
-      <h2>Галерея</h2>
-      <p class="lead">Фото и видео мероприятий, интерьера и проектов — нажмите, чтобы открыть в просмотрщике.</p>
-      <div class="photos-grid" id="photosGrid" aria-live="polite">
-        <!-- Фо��ографии загрузятся из data/photos.json -->
-      </div>
-      <p id="galleryNote" style="margin-top:10px;color:var(--muted);font-size:0.95rem;"></p>
+        <h2>Галерея</h2>
+        <p class="lead">Фото и видео мероприятий, интерьера и проектов — нажмите, чтобы открыть.</p>
+        <div class="photos-grid" id="photosGrid" aria-live="polite">
+            <!-- Фо��ографии загрузятся из data/photos.json -->
+        </div>
+        <p id="galleryNote" style="margin-top:10px;color:var(--muted);font-size:0.95rem;"></p>
+    </section>
+
+    <section id="about" class="about container">
+        <div class="about-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <h2>О доме культуры и библиотеке</h2>
+            <button id="aboutToggle" class="collapse-toggle" aria-expanded="false" aria-controls="aboutContent"
+                    aria-label="Показать раздел О библиотеке">
+          <span class="toggle-icon" aria-hidden="true">
+            <!-- simple chevron SVG -->
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+          </span>
+                <span class="toggle-label">Подробнее</span>
+            </button>
+        </div>
+
+        <div id="aboutContent" class="about-content collapsed" aria-hidden="true">
+            <p>Дивенский сельский дом культуры и библиотека — это центр культурной и общественной жизни посёлка
+                Дивенский. Мы проводим творческие инициативы и площадки для мероприятий: от
+                детских чтений и театральных кружков до выставок и фестивалей.</p>
+
+            <p>Наша миссия — поддерживать культурную активность жителей и сохранять местную память. В доме культуры
+                регулярно проходят концерты, мастер‑классы, лекции и кинопоказы; библиотека при этом обеспечивает доступ
+                к книгам и краеведческим материалам.</p>
+
+            <h3>Краткая история</h3>
+            <p>История нашего дома культуры началась в 1920‑е годы с небольшого читального уголка при сельском доме — со
+                временем он вырос в стабильную площадку для встреч, творчества и хранения локальной истории. Фонд и
+                архив аккумулировали письма, фотографии и материалы, связанные с жизнью поселка.</p>
+
+            <h3>Что мы предлагаем</h3>
+            <ul>
+                <li>Библиотечный фонд: классика, современная литература и детские издания;</li>
+                <li>Культурные программы: концерты, выставки, театральные и творческие студии;</li>
+                <li>Детские и молодёжные проекты: кружки, чтения и образовательные программы;</li>
+                <li>Краеведческий архив и вечерние чаепития</li>
+            </ul>
+
+            <div>
+                <p class="village-note">А здесь можно узнать больше о самом посёлке —
+                  <a href="https://divenskaya.ru/" target="_blank" rel="noopener noreferrer" title="О посёлке Дивенский (откроется в новой вкладке)" aria-label="О посёлке Дивенский, откроется в новой вкладке">Подробнее о посёлке</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog" class="catalog container">
+        <h2>Каталог</h2>
+        <div class="controls">
+            <input id="search" type="search" placeholder="Поиск по названию или автору" aria-label="Поиск по каталогу">
+        </div>
+
+        <div class="books-grid" id="booksGrid">
+            <!-- Карточки будут рендериться динамически из data/books.json -->
+        </div>
+
+        <div class="catalog-actions" style="text-align:center;margin-top:18px;">
+            <p id="catalogNote" style="margin-top:8px;color:var(--muted);font-size:0.95rem;"></p>
+        </div>
     </section>
 
     <section id="contact" class="contact container">
-      <h2>Отправить сообщение</h2>
-      <form id="contactForm" class="contact-form" data-emailjs-service="service_mz8c6fr" data-emailjs-template="template_i68tklk">
-        <label>
-          Ваше имя
-          <input type="text" name="name" required>
-        </label>
-        <label>
-          Email
-          <input type="email" name="email" required>
-        </label>
-        <label>
-          Сообщение
-          <textarea name="message" rows="4" required></textarea>
-        </label>
-        <button type="submit" class="btn">Отправить</button>
-        <p id="formMessage" class="form-message" aria-live="polite"></p>
-      </form>
+        <h2>Отправить сообщение</h2>
+        <form id="contactForm" class="contact-form" data-emailjs-service="service_mz8c6fr"
+              data-emailjs-template="template_i68tklk">
+            <label>
+                Ваше имя
+                <input type="text" name="name" required>
+            </label>
+            <label>
+                Email
+                <input type="email" name="email" required>
+            </label>
+            <label>
+                Сообщение
+                <textarea name="message" rows="4" required></textarea>
+            </label>
+            <button type="submit" class="btn">Отправить</button>
+            <p id="formMessage" class="form-message" aria-live="polite"></p>
+        </form>
     </section>
+
+    <!-- Новый раздел: Взаимодействие в Интернете -->
+    <section id="online" class="online container">
+      <h2>В интернете вместе</h2>
+        <p class="lead">Присоединяйтесь к нашим чатам в Telegram — общаемся, делимся новостями и просто остаёмся на связи.</p>
+        <div class="social-links" aria-label="Telegram links">
+        <a class="social-btn" href="https://t.me/Divenskiysegodnya" target="_blank" rel="noopener noreferrer" aria-label="Официальный канал в Telegram (откроется в новой вкладке)">
+          <!-- simple telegram glyph -->
+          <span class="social-icon" aria-hidden="true">✈︎</span>
+          <span class="social-text">Дивенский — чат жителей</span>
+        </a>
+        <a class="social-btn" href="https://t.me/massiv_div" target="_blank" rel="noopener noreferrer" aria-label="Чат сообщества в Telegram (откроется в новой вкладке)">
+          <span class="social-icon" aria-hidden="true">✈︎</span>
+          <span class="social-text">Дивенская — чат соседей</span>
+        </a>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="site-footer">
+<footer class="site-footer">
     <div class="container">
-      <p>© Дивенский дом культуры и библиотека — все права защищены</p>
-      <p class="small footer-contacts">
-        <a class="contact-link" href="tel:+78137421523" aria-label="Телефон: +7 (813) 742-15-23">
+        <p>© Дивенский дом культуры — все права защищены</p>
+        <p class="small footer-contacts">
+            <a class="contact-link" href="tel:+78137421523" aria-label="Телефон: +7 (813) 742-15-23">
           <span class="contact-icon" aria-hidden="true">
             <!-- phone SVG -->
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill="currentColor" d="M6.62 10.79a15.464 15.464 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.64.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.5a1 1 0 011 1 11.72 11.72 0 00.58 3.64 1 1 0 01-.24 1.02l-2.2 2.2z"/>
+              <path fill="currentColor"
+                    d="M6.62 10.79a15.464 15.464 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.64.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.5a1 1 0 011 1 11.72 11.72 0 00.58 3.64 1 1 0 01-.24 1.02l-2.2 2.2z"/>
             </svg>
           </span>
-          <span class="contact-text">+7 (813) 742-15-23</span>
-        </a>
-      </p>
-      <p class="small footer-contacts">
-        <a class="contact-link" href="mailto:info@divensky.ru" aria-label="Email: info@divensky.ru">
+                <span class="contact-text">+7 (813) 742-15-23</span>
+            </a>
+        </p>
+        <p class="small footer-contacts">
+            <a class="contact-link" href="mailto:info@divensky.ru" aria-label="Email: info@divensky.ru">
           <span class="contact-icon" aria-hidden="true">
             <!-- email SVG -->
             <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill="currentColor" d="M0 2v10h20V2H0zm18 2.2l-8 4.8-8-4.8V3.2L10 8l8-4.8v1.2z"/>
             </svg>
           </span>
-          <span class="contact-text">info@divensky.ru</span>
-        </a>
-      </p>
+                <span class="contact-text">info@divensky.ru</span>
+            </a>
+        </p>
     </div>
-  </footer>
+</footer>
 
-  <!-- Модальное окно для просмотра фотографий -->
-  <div id="photoModal" class="photo-modal" aria-hidden="true" role="dialog" aria-label="Фотогалерея">
+<!-- Модальное окно для просмотра фотографий -->
+<div id="photoModal" class="photo-modal" aria-hidden="true" role="dialog" aria-label="Фотогалерея">
     <button class="modal-close" aria-label="Закрыть">×</button>
     <button class="modal-prev" aria-label="Предыдущее изображение">‹</button>
     <button class="modal-next" aria-label="Следующее изображение">›</button>
     <div id="modalMedia" class="modal-media">
-      <img id="modalImage" src="" alt="">
-      <video id="modalVideo" controls playsinline style="display:none;" aria-hidden="true"></video>
+        <img id="modalImage" src="" alt="">
+        <video id="modalVideo" controls playsinline style="display:none;" aria-hidden="true"></video>
     </div>
     <div id="modalCaption" class="modal-caption"></div>
-  </div>
+</div>
 
-  <!-- Модальное окно ��ля просмотра информации о сотруднике -->
-  <div id="staffModal" class="staff-modal" aria-hidden="true" role="dialog" aria-label="Информация о сотруднике">
+<!-- Модальное окно ��ля просмотра информации о сотруднике -->
+<div id="staffModal" class="staff-modal" aria-hidden="true" role="dialog" aria-label="Информация о сотруднике">
     <button class="staff-modal-close" aria-label="Закрыть">×</button>
     <div class="staff-modal-content">
-      <div class="staff-modal-header">
-        <div class="staff-modal-avatar" id="staffModalAvatar" aria-hidden="true"></div>
-        <div class="staff-modal-info">
-          <h3 id="staffModalName"></h3>
-          <div id="staffModalRole" class="staff-modal-role" style="color:var(--muted);margin-top:6px"></div>
-          <div id="staffModalContacts" class="staff-modal-contacts" style="margin-top:8px"></div>
+        <div class="staff-modal-header">
+            <div class="staff-modal-avatar" id="staffModalAvatar" aria-hidden="true"></div>
+            <div class="staff-modal-info">
+                <h3 id="staffModalName"></h3>
+                <div id="staffModalRole" class="staff-modal-role" style="color:var(--muted);margin-top:6px"></div>
+                <div id="staffModalContacts" class="staff-modal-contacts" style="margin-top:8px"></div>
+            </div>
         </div>
-      </div>
-      <div id="staffModalBio" class="staff-modal-bio" style="margin-top:12px"></div>
+        <div id="staffModalBio" class="staff-modal-bio" style="margin-top:12px"></div>
     </div>
-  </div>
+</div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <script type="text/javascript"
-          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-  </script>
-  <script type="text/javascript">
-      (function(){
-          emailjs.init({
-              publicKey: "2b7bpapd52kilEcdR",
-          });
-      })();
-  </script>
-  <script src="js/main.js"></script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+    (function () {
+        emailjs.init({
+            publicKey: "2b7bpapd52kilEcdR",
+        });
+    })();
+</script>
+<script src="js/main.js"></script>
 </body>
 </html>

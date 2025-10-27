@@ -576,7 +576,8 @@
             marker.bindPopup(popupHtml, {maxWidth: 260, offset: L.point(0, 0), autoPan: false}).openPopup();
             var osmLink = document.getElementById('osmLink');
             if (osmLink) {
-                osmLink.href = 'https://www.openstreetmap.org/?mlat=' + lat + '&mlon=' + lon + '#map=' + zoom + '/' + lat + '/' + lon;
+                // use Yandex Maps centered on lon,lat with the same zoom and a marker
+                osmLink.href = 'https://yandex.ru/maps/?ll=' + lon + '%2C' + lat + '&z=' + zoom + '&pt=' + lon + ',' + lat + ',pm2rdm';
             }
         }
     } catch (err) {
