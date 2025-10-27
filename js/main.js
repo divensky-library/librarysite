@@ -134,21 +134,6 @@
     (function () {
         var staff = [];
         var staffGrid = document.getElementById('staffGrid');
-        // staff modal elements
-        var staffModal = document.getElementById('staffModal');
-        var staffModalClose = staffModal && staffModal.querySelector('.staff-modal-close');
-        var staffModalAvatar = document.getElementById('staffModalAvatar');
-        var staffModalName = document.getElementById('staffModalName');
-        var staffModalRole = document.getElementById('staffModalRole');
-        var staffModalContacts = document.getElementById('staffModalContacts');
-        var staffModalBio = document.getElementById('staffModalBio');
-        var _staffPrevFocus = null;
-
-        function initials(name) {
-            if (!name) return '';
-            var parts = name.trim().split(/\s+/);
-            return (parts[0] ? parts[0][0] : '') + (parts[1] ? parts[1][0] : '');
-        }
 
         function createStaffCard(emp) {
             var card = document.createElement('div');
@@ -159,20 +144,12 @@
             var avatar = document.createElement('div');
             avatar.className = 'staff-avatar';
             avatar.setAttribute('aria-hidden', 'true');
-            // if a photo path is provided, show the image; otherwise show initials
-            if (emp.photo) {
-                try {
-                    var img = document.createElement('img');
-                    img.src = emp.photo;
-                    img.alt = emp.name ? (emp.name + ' — фото') : 'Фото сотрудника';
-                    img.loading = 'lazy';
-                    avatar.appendChild(img);
-                } catch (e) {
-                    avatar.textContent = initials(emp.name).toUpperCase();
-                }
-            } else {
-                avatar.textContent = initials(emp.name).toUpperCase();
-            }
+            // create <img> and use emp.photo if present, otherwise use external default SVG
+            var avatarImg = document.createElement('img');
+            avatarImg.src = emp.photo || 'images/defaultPersonIcon.svg';
+            avatarImg.alt = emp.name ? (emp.name + ' — фото') : 'Фото сотрудника';
+            avatarImg.loading = 'lazy';
+            avatar.appendChild(avatarImg);
 
             var info = document.createElement('div');
             info.className = 'staff-info';
@@ -250,8 +227,7 @@
             card.appendChild(info);
 
             // Interaction removed: clicking or pressing keys on the staff card no longer opens the modal.
-            // If you want an explicit "Подробнее" button later, we can add a small button inside the card that
-            // calls openStaffModal(emp) so contact links keep working without the whole card acting as a button.
+            // If you want an explicit "Подробнее" button later, we can add a small inline button to show details.
             return card;
         }
 
@@ -265,102 +241,6 @@
             staffGrid.appendChild(frag);
         }
 
-        // Staff modal helpers
-        function openStaffModal(emp) {
-            if (!staffModal) return;
-            // avatar: show photo if available, otherwise initials
-            try {
-                if (staffModalAvatar) {
-                    staffModalAvatar.innerHTML = '';
-                    if (emp.photo) {
-                        var im = document.createElement('img');
-                        im.src = emp.photo;
-                        im.alt = emp.name ? (emp.name + ' — фото') : 'Фото сотрудника';
-                        im.loading = 'lazy';
-                        staffModalAvatar.appendChild(im);
-                    } else {
-                        staffModalAvatar.textContent = initials(emp.name).toUpperCase();
-                    }
-                }
-            } catch (e) {
-            }
-            if (staffModalName) staffModalName.textContent = emp.name || '';
-            if (staffModalRole) staffModalRole.textContent = emp.role || '';
-            if (staffModalContacts) {
-                staffModalContacts.innerHTML = '';
-                if (emp.email) {
-                    var ea = document.createElement('a');
-                    ea.href = 'mailto:' + emp.email;
-                    ea.className = 'contact-link';
-                    ea.setAttribute('aria-label', 'Email: ' + emp.email);
-                    var eIcon = document.createElement('span');
-                    eIcon.className = 'contact-icon';
-                    eIcon.setAttribute('aria-hidden', 'true');
-                    eIcon.innerHTML = '<svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M0 2v10h20V2H0zm18 2.2l-8 4.8-8-4.8V3.2L10 8l8-4.8v1.2z"/></svg>';
-                    var eText = document.createElement('span');
-                    eText.className = 'contact-text';
-                    eText.textContent = emp.email;
-                    ea.appendChild(eIcon);
-                    ea.appendChild(eText);
-                    staffModalContacts.appendChild(ea);
-                }
-                if (emp.phone) {
-                    if (staffModalContacts.firstChild) staffModalContacts.appendChild(document.createTextNode(' '));
-                    var pa = document.createElement('a');
-                    pa.href = 'tel:' + (emp.phone || '').replace(/[^\d+]+/g, '');
-                    pa.className = 'contact-link';
-                    pa.setAttribute('aria-label', 'Телефон: ' + emp.phone);
-                    var pIcon = document.createElement('span');
-                    pIcon.className = 'contact-icon';
-                    pIcon.setAttribute('aria-hidden', 'true');
-                    pIcon.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M6.62 10.79a15.464 15.464 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.64.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.5a1 1 0 011 1 11.72 11.72 0 00.58 3.64 1 1 0 01-.24 1.02l-2.2 2.2z"/></svg>';
-                    var pText = document.createElement('span');
-                    pText.className = 'contact-text';
-                    pText.textContent = emp.phone;
-                    pa.appendChild(pIcon);
-                    pa.appendChild(pText);
-                    staffModalContacts.appendChild(pa);
-                }
-            }
-            if (staffModalBio) staffModalBio.textContent = emp.bio || '';
-
-            // focus management: save and restore focus
-            _staffPrevFocus = document.activeElement;
-            staffModal.classList.add('open');
-            staffModal.setAttribute('aria-hidden', 'false');
-            setTimeout(function () {
-                staffModalClose && staffModalClose.focus();
-            }, 60);
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeStaffModal() {
-            if (!staffModal) return;
-            staffModal.classList.remove('open');
-            staffModal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-            // restore focus to the previously focused element
-            if (_staffPrevFocus) {
-                try {
-                    _staffPrevFocus.focus();
-                } catch (e) {
-                }
-                _staffPrevFocus = null;
-            }
-        }
-
-        // wire modal close handlers
-        if (staffModalClose) staffModalClose.addEventListener('click', closeStaffModal);
-        if (staffModal) {
-            staffModal.addEventListener('click', function (e) {
-                if (e.target === staffModal) closeStaffModal();
-            });
-        }
-        // close with Escape
-        document.addEventListener('keydown', function (e) {
-            if (!staffModal) return;
-            if (staffModal.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') closeStaffModal();
-        });
 
         function fetchEmployees() {
             var url = '../data/employees.json';
