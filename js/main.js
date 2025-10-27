@@ -281,82 +281,92 @@
         // удалена по запросу — теперь пункты меню не подсвечиваются при скролле.
     })();
 
-    // --- Collapsible About section (toggle show/hide with accessible aria updates) ---
+    // --- Collapsible sections: wire any button with class .collapse-toggle to its aria-controls panel ---
     (function () {
-        var btn = document.getElementById('aboutToggle');
-        var content = document.getElementById('aboutContent');
-        if (!btn || !content) return;
+        var toggles = Array.prototype.slice.call(document.querySelectorAll('.collapse-toggle'));
+        if (!toggles || toggles.length === 0) return;
 
-        var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var labelEl = btn.querySelector('.toggle-label');
+        toggles.forEach(function (btn) {
+            var targetId = btn.getAttribute('aria-controls');
+            if (!targetId) return;
+            var content = document.getElementById(targetId);
+            if (!content) return;
 
-        function setLabelExpanded(expanded) {
-            try {
-                if (labelEl) {
-                    labelEl.textContent = expanded ? 'Свернуть' : 'Подробнее';
+            var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var labelEl = btn.querySelector('.toggle-label');
+
+            function getSectionName() {
+                try {
+                    var sect = btn.closest('section');
+                    if (!sect) return '';
+                    var h = sect.querySelector('h2');
+                    return h ? h.textContent : '';
+                } catch (e) {
+                    return '';
                 }
-            } catch (e) {
             }
-            btn.setAttribute('aria-label', (expanded ? 'Свернуть раздел О библиотеке' : 'Показать раздел О библиотеке'));
-        }
 
-        function expand() {
-            btn.setAttribute('aria-expanded', 'true');
-            content.classList.remove('collapsed');
-            content.setAttribute('aria-hidden', 'false');
-            setLabelExpanded(true);
-            if (prefersReduced) {
-                content.style.maxHeight = 'none';
-                return;
+            function setLabelExpanded(expanded) {
+                try {
+                    if (labelEl) labelEl.textContent = expanded ? 'Свернуть' : 'Подробнее';
+                } catch (e) {
+                }
+                var name = getSectionName();
+                btn.setAttribute('aria-label', (expanded ? 'Свернуть раздел' : 'Показать раздел') + (name ? ' ' + name : ''));
             }
-            // set explicit max-height to allow transition
-            var h = content.scrollHeight;
-            content.style.maxHeight = h + 'px';
-            // after transition, remove max-height so content can size naturally if its internal layout changes
-            setTimeout(function () {
+
+            function expand() {
+                btn.setAttribute('aria-expanded', 'true');
+                content.classList.remove('collapsed');
+                content.setAttribute('aria-hidden', 'false');
+                setLabelExpanded(true);
+                if (prefersReduced) {
+                    content.style.maxHeight = 'none';
+                    return;
+                }
+                var h = content.scrollHeight;
+                content.style.maxHeight = h + 'px';
+                setTimeout(function () {
+                    content.style.maxHeight = '';
+                }, 320);
+            }
+
+            function collapse() {
+                btn.setAttribute('aria-expanded', 'false');
+                setLabelExpanded(false);
+                if (prefersReduced) {
+                    content.classList.add('collapsed');
+                    content.setAttribute('aria-hidden', 'true');
+                    content.style.maxHeight = '0';
+                    return;
+                }
+                var h = content.scrollHeight;
+                content.style.maxHeight = h + 'px';
+                requestAnimationFrame(function () {
+                    content.classList.add('collapsed');
+                    content.setAttribute('aria-hidden', 'true');
+                    content.style.maxHeight = '0';
+                });
+            }
+
+            // initialize state
+            if (content.classList.contains('collapsed') || content.getAttribute('aria-hidden') === 'true') {
+                content.classList.add('collapsed');
+                content.setAttribute('aria-hidden', 'true');
+                btn.setAttribute('aria-expanded', 'false');
+                content.style.maxHeight = '0';
+                setLabelExpanded(false);
+            } else {
+                btn.setAttribute('aria-expanded', 'true');
+                content.setAttribute('aria-hidden', 'false');
                 content.style.maxHeight = '';
-            }, 320);
-        }
-
-        function collapse() {
-            btn.setAttribute('aria-expanded', 'false');
-            setLabelExpanded(false);
-            // for animation: set current height then set to 0
-            if (prefersReduced) {
-                content.classList.add('collapsed');
-                content.setAttribute('aria-hidden', 'true');
-                content.style.maxHeight = '0';
-                return;
+                setLabelExpanded(true);
             }
-            var h = content.scrollHeight;
-            content.style.maxHeight = h + 'px';
-            // force frame then collapse
-            requestAnimationFrame(function () {
-                content.classList.add('collapsed');
-                content.setAttribute('aria-hidden', 'true');
-                content.style.maxHeight = '0';
+
+            btn.addEventListener('click', function () {
+                var isCollapsed = content.classList.contains('collapsed');
+                if (isCollapsed) expand(); else collapse();
             });
-        }
-
-        // initialize state based on markup (class collapsed / aria-hidden)
-        if (content.classList.contains('collapsed') || content.getAttribute('aria-hidden') === 'true') {
-            // ensure collapsed styles applied
-            content.classList.add('collapsed');
-            content.setAttribute('aria-hidden', 'true');
-            btn.setAttribute('aria-expanded', 'false');
-            content.style.maxHeight = '0';
-            setLabelExpanded(false);
-        } else {
-            // expanded
-            btn.setAttribute('aria-expanded', 'true');
-            content.setAttribute('aria-hidden', 'false');
-            content.style.maxHeight = '';
-            setLabelExpanded(true);
-        }
-
-        btn.addEventListener('click', function () {
-            var isCollapsed = content.classList.contains('collapsed');
-            if (isCollapsed) expand(); else collapse();
         });
     })();
 

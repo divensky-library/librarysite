@@ -589,9 +589,10 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 .collapse-toggle {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 250, 0.98));
-    border: 1px solid rgba(107, 90, 74, 0.08);
-    color: var(--muted);
+    /* Brown primary button to improve visibility */
+    background: linear-gradient(180deg, var(--accent), #5b3d27);
+    border: 1px solid rgba(0,0,0,0.08);
+    color: #fff;
     font-size: 0.95rem;
     cursor: pointer;
     padding: 8px 10px;
@@ -599,12 +600,13 @@ html::-webkit-scrollbar-thumb:hover {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: background .12s ease, box-shadow .12s ease, color .12s ease;
+    transition: background .12s ease, box-shadow .12s ease, transform .08s ease;
 }
 
 .collapse-toggle:hover {
-    background: linear-gradient(180deg, #fffefc, #fff9f0);
-    box-shadow: 0 6px 18px rgba(107, 90, 74, 0.04)
+    background: linear-gradient(180deg, #7a5a3f, #5b3d27);
+    box-shadow: 0 8px 20px rgba(107, 74, 46, 0.12);
+    transform: translateY(-1px);
 }
 
 .collapse-toggle:focus {
@@ -623,8 +625,9 @@ html::-webkit-scrollbar-thumb:hover {
 
 .collapse-toggle .toggle-label {
     font-weight: 600;
-    color: var(--accent);
-    font-size: 0.95rem
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1;
 }
 
 /* Content wrapper: animate max-height and opacity. Initial collapsed state uses class 'collapsed'.

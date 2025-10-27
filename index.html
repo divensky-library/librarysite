@@ -59,17 +59,31 @@
         </div>
     </section>
 
-    <!-- Перемещённая секция: Как пройти (теперь перед каталогом) -->
+    <!-- Перемещённая секция: Как пройти (теперь перед каталогом) — сделана сворачиваемой -->
     <section id="howto" class="howto container">
-        <h2>Как пройти</h2>
-        <div class="map-wrap">
-            <div id="map" role="region" aria-label="Карта проезда" tabindex="0"></div>
-            <p class="map-note"><a id="osmLink">Открыть в Яндексе</a></p>
+        <div class="about-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <h2>Как пройти</h2>
+            <button id="howtoToggle" class="collapse-toggle" aria-expanded="false" aria-controls="howtoContent" aria-label="Показать раздел Как пройти">
+              <span class="toggle-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+                <span class="toggle-label">Подробнее</span>
+            </button>
+        </div>
 
-            <div class="map-hours" style="margin-top:8px;color:var(--muted);">
-                <h3 style="margin:0 0 6px 0;font-size:1rem;">Часы работы</h3>
-                <p style="margin:0;">Понедельник — суббота: 09:00 — 18:00<br>
-                    Воскресенье: выходной</p>
+        <div id="howtoContent" class="about-content collapsed" aria-hidden="true">
+            <div class="map-wrap">
+                <div id="map" role="region" aria-label="Карта проезда" tabindex="0"></div>
+                <p class="map-note"><a id="osmLink">Открыть в Яндексе</a></p>
+
+                <div class="map-hours" style="margin-top:8px;color:var(--muted);">
+                    <h3 style="margin:0 0 6px 0;font-size:1rem;">Часы работы</h3>
+                    <p style="margin:0;">Понедельник — суббота: 09:00 — 18:00<br>
+                        Воскресенье: выходной</p>
+                </div>
+
             </div>
 
         </div>
